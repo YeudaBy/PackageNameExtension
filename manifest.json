@@ -1,7 +1,7 @@
 {
     "name": "Package Name",
     "description": "Find the package name from play store.",
-    "version": "2.5",
+    "version": "2.6",
     "manifest_version": 3,
     "permissions": ["tabs"],
     "action": {
