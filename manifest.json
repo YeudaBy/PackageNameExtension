@@ -19,5 +19,9 @@
         "48": "icon.png",
         "128": "icon.png"
     },
-    "options_page": "options.html"
+    "options_page": "options.html",
+    "content_scripts": [{
+        "matches": ["https://play.google.com/store/apps/details?id=*"],
+        "js": ["gpa.js"]
+    }]
 }
