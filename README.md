@@ -56,5 +56,5 @@ If the description includes some Emojis, They'll be replaced to `*`.
 In case you will see `undefined` in the fields, just press <kbd>F5</kbd>. 
 
 ### TODO
--[ ] Add copy button to all the fields
--[ ] Fix refreshing 
+- [ ] Add copy button to all the fields
+- [ ] Fix refreshing 
