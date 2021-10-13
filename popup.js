@@ -1,3 +1,10 @@
+function onLoad() {
+    document.getElementById("go-to-input").focus();
+}
+
+window.onload = onLoad;
+
+
 function getName(url) {
     let reg = RegExp('(?<=id=)[a-zA-Z0-9._]+', 'g');
     return reg.exec(url)[0];
@@ -5,7 +12,7 @@ function getName(url) {
 
 baseUrl = "https://play.google.com/store/apps/details?id=";
 
-chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     if (tabs[0].url.startsWith(baseUrl))
         chrome.tabs.reload(tabs[0].id);
 })
@@ -26,9 +33,13 @@ chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
     }
 });
 
+// document.querySelector("#go-to-input").addEventListener("input", data => {
+//     document.querySelector("#go-to-input").style.backgroud = "#4d90fe"
+// });
+
 
 let copyName = document.querySelector(".copy-name");
-copyName.addEventListener("click", async() => {
+copyName.addEventListener("click", async () => {
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
 
         copy(getName(tabs[0].url));
@@ -36,26 +47,30 @@ copyName.addEventListener("click", async() => {
     });
 });
 
-document.getElementById("go-to-form").addEventListener("submit", function() {
-    chrome.tabs.query({ url: "https://play.google.com/*" }, tabs => {
-        let name = document.getElementById("go-to-input").value;
-        if (tabs[0] != undefined) {
-            chrome.tabs.update(tabs[0].id, { highlighted: true, url: baseUrl + name });
-        } else
-            chrome.tabs.create({ active: true, url: baseUrl + name })
-    })
+document.getElementById("go-to-form").addEventListener("submit", function () {
+    console.log(document.querySelector("#go-to-input"))
+    // if (!(isNaN(document.querySelector("#go-to-input")))) {
+
+        chrome.tabs.query({ url: "https://play.google.com/*" }, tabs => {
+            let name = document.getElementById("go-to-input").value;
+            if (tabs[0] != undefined) {
+                chrome.tabs.update(tabs[0].id, { highlighted: true, url: baseUrl + name });
+            } else
+                chrome.tabs.create({ active: true, url: baseUrl + name })
+        })
+    // }
 });
 
 
-document.getElementById("show-info").addEventListener("click", function() {
+document.getElementById("show-info").addEventListener("click", function () {
     var info = {};
     document.getElementById("info-div").style.display = "block";
-    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         chrome.tabs.reload(tabs[0].id);
 
         function getInfo() {
 
-            chrome.tabs.sendMessage(tabs[0].id, { get: "info" }, function(response) {
+            chrome.tabs.sendMessage(tabs[0].id, { get: "info" }, function (response) {
 
                 title = document.getElementById("title");
                 author = document.getElementById("author");
